@@ -14,20 +14,23 @@
       {
         "id": "02-practical-deep-learning",
         "title": "Practical Deep Learning",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
+        "text": "Practical Deep Learning goes beyond theory and looks at how models are actually trained and deployed on massive GPU clusters. It involves setting up data pipelines, batching large datasets, configuring computational graphs, and optimizing the backpropagation process. This module covers the hardware and infrastructure required to train state-of-the-art models efficiently.",
+        "visualType": "neural-network",
+        "imageUrl": "/practical_deep_learning.jpg"
       },
       {
         "id": "03-cnn-architectures",
         "title": "CNN Architectures",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
+        "text": "Since the creation of the first CNNs, the architecture has evolved dramatically. This module compares foundational networks like VGG-16, which uses sequential max-pooling layers, to modern architectures like ResNet-50. ResNet introduces 'Skip Connections' (Residual Blocks) that allow gradients to flow backwards through deep layers without vanishing, enabling us to train networks with hundreds of layers.",
+        "visualType": "neural-network",
+        "imageUrl": "/cnn_architectures.jpg"
       },
       {
         "id": "04-object-detection",
         "title": "Object Detection",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
+        "text": "Object Detection extends image classification by not only identifying what is in an image, but exactly where it is. Using algorithms like YOLO (You Only Look Once) or Faster R-CNN, the AI draws bounding boxes around multiple objects simultaneously and assigns confidence scores. This is the foundational technology behind autonomous vehicles navigating complex street scenes.",
+        "visualType": "neural-network",
+        "imageUrl": "/object_detection.jpg"
       },
       {
         "id": "05-image-segmentation",
@@ -51,8 +54,9 @@
       {
         "id": "08-vision-transformers",
         "title": "Vision Transformers",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "nlp-scene"
+        "text": "Vision Transformers (ViT) represent a paradigm shift away from CNNs. Instead of convolutions, a ViT splits an image into a grid of patches. Each patch is flattened into a sequence of tokens and fed into a Multi-Head Self-Attention mechanism\u2014the exact same architecture used in Large Language Models. This allows the model to understand global relationships between distant parts of an image instantly.",
+        "visualType": "nlp-scene",
+        "imageUrl": "/transformers_vision.jpg"
       },
       {
         "id": "09-introduction-to-deep-unsupervised-learning",
