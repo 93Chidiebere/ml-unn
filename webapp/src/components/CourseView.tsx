@@ -88,40 +88,49 @@ export default function CourseView() {
           </div>
         </div>
 
-        {/* Right Panel: Results / Visualization */}
-        <div className="flex-1 flex flex-col bg-[#0a0a0a] overflow-hidden">
-          {/* Top Panel: Textual explanation */}
-          <div className="border-b border-gray-900 p-8 bg-black/50 shrink-0">
-            <h2 className="text-2xl font-medium tracking-tight mb-3">{activeModule.title}</h2>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-3xl">
-              {activeModule.text}
-            </p>
-          </div>
-          
-          {/* Bottom Panel: Visualizer / Image */}
-          <div className="flex-1 relative overflow-hidden bg-black flex items-center justify-center p-8">
-            {activeModule.imageUrl ? (
-              <img 
-                src={activeModule.imageUrl} 
-                alt={activeModule.title} 
-                className="max-h-full max-w-full object-contain rounded-xl border border-gray-800 shadow-2xl" 
-              />
-            ) : (
-              <>
-                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ml-green opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Model Rendered</span>
+        {/* Right Panel: Scrolling Article */}
+        <div className="flex-1 bg-[#050505] overflow-y-auto">
+          <div className="max-w-4xl mx-auto px-12 py-16">
+            <h2 className="text-4xl font-semibold tracking-tight mb-12 text-white">{activeModule.title}</h2>
+            
+            <div className="space-y-12">
+              {activeModule.contentBlocks?.map((block: any, idx: number) => {
+                if (block.type === 'text') {
+                  return (
+                    <p key={idx} className="text-gray-300 text-lg leading-relaxed font-light">
+                      {block.content}
+                    </p>
+                  );
+                } else if (block.type === 'image') {
+                  return (
+                    <div key={idx} className="w-full my-8">
+                      <img 
+                        src={block.content} 
+                        alt="Illustration" 
+                        className="w-full rounded-xl border border-gray-800 shadow-2xl" 
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })}
+
+              {/* Fallback for unmigrated or empty blocks */}
+              {(!activeModule.contentBlocks || activeModule.contentBlocks.length === 0) && (
+                <div className="h-[500px] relative mt-8 border border-gray-800 rounded-xl overflow-hidden bg-[#0a0a0a]">
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ml-green opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Model Rendered</span>
+                  </div>
+                  {renderScene(activeModule.visualType, activeModule.id)}
                 </div>
-                
-                {renderScene(activeModule.visualType, activeModule.id)}
-              </>
-            )}
+              )}
+            </div>
           </div>
         </div>
-        
       </div>
     </div>
   );
