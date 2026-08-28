@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ml-green: #10B981;
+  --color-ml-dark: #050505;
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-ml-dark);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Geist Mono", monospace;
+}

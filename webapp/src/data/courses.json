@@ -1,0 +1,501 @@
+[
+  {
+    "id": "computer-vision",
+    "title": "Computer Vision",
+    "description": "Learn about Computer Vision based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "01-introduction-to-computer-vision-and-cnns",
+        "title": "Introduction to Computer Vision and CNNs",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "02-practical-deep-learning",
+        "title": "Practical Deep Learning",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "03-cnn-architectures",
+        "title": "CNN Architectures",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "04-object-detection",
+        "title": "Object Detection",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "05-image-segmentation",
+        "title": "Image Segmentation",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "06-recurrent-neural-networks",
+        "title": "Recurrent Neural Networks",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "07-transformers",
+        "title": "Transformers",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "08-vision-transformers",
+        "title": "Vision Transformers",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "09-introduction-to-deep-unsupervised-learning",
+        "title": "Introduction to Deep Unsupervised Learning",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "10-autoencoders-and-vae",
+        "title": "Autoencoders and VAE",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "11-autoregressive-models",
+        "title": "Autoregressive Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "12-normalizing-flow-models",
+        "title": "Normalizing Flow Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "13-generative-adversarial-networks",
+        "title": "Generative Adversarial Networks",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "14-diffusion-models",
+        "title": "Diffusion Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "15-advanced-image-generation-models",
+        "title": "Advanced Image Generation Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "16-stable-diffusion",
+        "title": "Stable Diffusion",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "17-learning-from-videos",
+        "title": "Learning from Videos",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "18-video-generation",
+        "title": "Video Generation",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "19-self-supervised-learning",
+        "title": "Self Supervised Learning",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "20-contrastive-learning-methods",
+        "title": "Contrastive Learning Methods",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "21-vision-and-text-integration",
+        "title": "Vision and Text Integration",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "22-advanced-ssl-and-jepa-models",
+        "title": "Advanced SSL and JEPA Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "23-foundation-models",
+        "title": "Foundation Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "24-world-models",
+        "title": "World Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "generative-ai",
+    "title": "Generative AI",
+    "description": "Learn about Generative AI based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "01-generative-ai-for-science",
+        "title": "Generative AI for Science",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "introduction-to-ai",
+    "title": "Introduction To AI",
+    "description": "Learn about Introduction To AI based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "01-data-science-foundations",
+        "title": "Data Science Foundations",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "scatter-plot"
+      },
+      {
+        "id": "02-machine-learning-algorithms",
+        "title": "Machine Learning Algorithms",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "03-fundamentals-of-deep-learning",
+        "title": "Fundamentals of Deep Learning",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "04-unsupervised-learning",
+        "title": "Unsupervised Learning",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "05-data-preprocessing",
+        "title": "Data Preprocessing",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "scatter-plot"
+      },
+      {
+        "id": "06-decision-trees",
+        "title": "Decision Trees",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "decision-tree"
+      },
+      {
+        "id": "07-linear-regression",
+        "title": "Linear Regression",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "scatter-plot"
+      },
+      {
+        "id": "08-support-vector-machines",
+        "title": "Support Vector Machines",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "scatter-plot"
+      },
+      {
+        "id": "09-responsible-ai-and-model-interpretability",
+        "title": "Responsible AI and Model Interpretability",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "10-mlops-foundations",
+        "title": "MLOps Foundations",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "natural-language-processing",
+    "title": "Natural Language Processing",
+    "description": "Learn about Natural Language Processing based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "01-introduction-to-nlp",
+        "title": "Introduction to NLP",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "02-vector-space-and-word-embeddings",
+        "title": "Vector Space and Word Embeddings",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "scatter-plot"
+      },
+      {
+        "id": "03-recurrent-neural-networks",
+        "title": "Recurrent Neural Networks",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "04-sequence-to-sequence-models",
+        "title": "Sequence to Sequence Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "05-attention-mechanism",
+        "title": "Attention Mechanism",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "06-transformers",
+        "title": "Transformers",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "07-large-language-models",
+        "title": "Large Language Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "08-fine-tuning-llms-and-rlhf",
+        "title": "Fine Tuning LLMs and RLHF",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "09-prompting-and-rag",
+        "title": "Prompting and RAG",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "10-multimodal-nlp",
+        "title": "Multimodal NLP",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "11-agentic-ai",
+        "title": "Agentic AI",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "12-ai-safety-for-agents",
+        "title": "AI Safety for Agents",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "13-mixture-of-experts",
+        "title": "Mixture of Experts",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "14-large-reasoning-models",
+        "title": "Large Reasoning Models",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "15-rl-post-training-grpo-and-gspo",
+        "title": "RL Post Training GRPO and GSPO",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "16-transformers-2017-vs-2026",
+        "title": "Transformers 2017 vs 2026",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "17-inference-optimisation",
+        "title": "Inference Optimisation",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "18-recent-advancements-in-nlp",
+        "title": "Recent Advancements in NLP",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "19-audio-processing-in-nlp",
+        "title": "Audio Processing in NLP",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "20-speech-to-text",
+        "title": "Speech to Text",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "21-text-to-speech",
+        "title": "Text to Speech",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "nlp-scene"
+      },
+      {
+        "id": "22-llm-evaluation",
+        "title": "LLM Evaluation",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "23-distributed-training-and-serving",
+        "title": "Distributed Training and Serving",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "preamble",
+    "title": "preamble",
+    "description": "Learn about preamble based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "beamer-settings",
+        "title": "beamer settings",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "beamer-settings-ka-lmh",
+        "title": "beamer settings-KA-LMH",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "commands",
+        "title": "commands",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "packages",
+        "title": "packages",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "reinforcement-learning",
+    "title": "Reinforcement Learning",
+    "description": "Learn about Reinforcement Learning based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "01-rl-foundations",
+        "title": "RL Foundations",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "02-value-based-methods",
+        "title": "Value-Based Methods",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "03-vanilla-policy-gradient",
+        "title": "Vanilla Policy Gradient",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "04-policy-optimization",
+        "title": "Policy Optimization",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "05-continuous-control-1",
+        "title": "Continuous Control 1",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "06-continuous-control-2",
+        "title": "Continuous Control 2",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "07-the-reward-problem",
+        "title": "The Reward Problem",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "08-model-based-and-offline-rl",
+        "title": "Model Based and Offline RL",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "09-rl-in-real-world",
+        "title": "RL in real world",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "10-meta-rl-open-problems",
+        "title": "Meta RL Open problems",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  },
+  {
+    "id": "sections",
+    "title": "sections",
+    "description": "Learn about sections based on KAUST Academy materials.",
+    "modules": [
+      {
+        "id": "cover",
+        "title": "cover",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "cover-ka+lmh",
+        "title": "cover-KA+LMH",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      },
+      {
+        "id": "toc",
+        "title": "toc",
+        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
+        "visualType": "neural-network"
+      }
+    ]
+  }
+]

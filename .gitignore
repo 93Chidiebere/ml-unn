@@ -1,0 +1,17 @@
+# Ignore massive zip files
+*.zip
+
+# Ignore the extracted source materials (they belong to KAUST repo)
+source/
+
+# Ignore node_modules
+**/node_modules/
+**/dist/
+**/.vite/
+
+# Ignore environment variables
+.env
+.env.local
+
+# General ignores
+.DS_Store
