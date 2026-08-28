@@ -376,37 +376,6 @@
     ]
   },
   {
-    "id": "preamble",
-    "title": "preamble",
-    "description": "Learn about preamble based on KAUST Academy materials.",
-    "modules": [
-      {
-        "id": "beamer-settings",
-        "title": "beamer settings",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      },
-      {
-        "id": "beamer-settings-ka-lmh",
-        "title": "beamer settings-KA-LMH",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      },
-      {
-        "id": "commands",
-        "title": "commands",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      },
-      {
-        "id": "packages",
-        "title": "packages",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      }
-    ]
-  },
-  {
     "id": "reinforcement-learning",
     "title": "Reinforcement Learning",
     "description": "Learn about Reinforcement Learning based on KAUST Academy materials.",
@@ -468,31 +437,6 @@
       {
         "id": "10-meta-rl-open-problems",
         "title": "Meta RL Open problems",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      }
-    ]
-  },
-  {
-    "id": "sections",
-    "title": "sections",
-    "description": "Learn about sections based on KAUST Academy materials.",
-    "modules": [
-      {
-        "id": "cover",
-        "title": "cover",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      },
-      {
-        "id": "cover-ka+lmh",
-        "title": "cover-KA+LMH",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
-      },
-      {
-        "id": "toc",
-        "title": "toc",
         "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
         "visualType": "neural-network"
       }

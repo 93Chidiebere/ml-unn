@@ -98,17 +98,27 @@ export default function CourseView() {
             </p>
           </div>
           
-          {/* Bottom Panel: 3D Scene */}
-          <div className="flex-1 relative">
-            <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ml-green opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Model Rendered</span>
-            </div>
-            
-            {renderScene(activeModule.visualType, activeModule.id)}
+          {/* Bottom Panel: Visualizer / Image */}
+          <div className="flex-1 relative overflow-hidden bg-black flex items-center justify-center p-8">
+            {activeModule.imageUrl ? (
+              <img 
+                src={activeModule.imageUrl} 
+                alt={activeModule.title} 
+                className="max-h-full max-w-full object-contain rounded-xl border border-gray-800 shadow-2xl" 
+              />
+            ) : (
+              <>
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ml-green opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Model Rendered</span>
+                </div>
+                
+                {renderScene(activeModule.visualType, activeModule.id)}
+              </>
+            )}
           </div>
         </div>
         
