@@ -7,8 +7,9 @@
       {
         "id": "01-introduction-to-computer-vision-and-cnns",
         "title": "Introduction to Computer Vision and CNNs",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
+        "text": "Computer Vision enables machines to interpret and understand the visual world. In this module, we explore Convolutional Neural Networks (CNNs), which are specifically designed to process pixel data. A CNN uses 'Convolutional Layers' to apply filters (kernels) that extract features like edges and textures, 'Pooling Layers' to compress the spatial dimensions, and 'Fully Connected Layers' to output a final classification (e.g., detecting if an image contains a Dog or a Cat). The architectural design drastically reduces the parameters needed compared to standard networks, making it the industry standard for visual tasks.",
+        "visualType": "neural-network",
+        "imageUrl": "/cnn_intro_illustration.jpg"
       },
       {
         "id": "02-practical-deep-learning",
@@ -31,8 +32,9 @@
       {
         "id": "05-image-segmentation",
         "title": "Image Segmentation",
-        "text": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies.",
-        "visualType": "neural-network"
+        "text": "Image Segmentation goes a step further than standard object detection. Instead of just drawing a bounding box around a car, semantic segmentation assigns a class label to every single pixel in the image. This means the AI understands the exact geometric boundaries of the car, the road, the pedestrians, and the sky. This is crucial for applications like autonomous driving and medical imaging, where precise boundaries (like the edge of a tumor or the curvature of a lane) must be calculated exactly.",
+        "visualType": "neural-network",
+        "imageUrl": "/image_segmentation.jpg"
       },
       {
         "id": "06-recurrent-neural-networks",
