@@ -13,7 +13,11 @@
         "contentBlocks": [
           {
             "type": "text",
-            "content": "Computer Vision enables machines to interpret and understand the visual world. But how do we build vision models? Historically, we worked with tabular data using standard Fully Connected Neural Networks. To apply this to images, we tried treating every single pixel as a feature."
+            "content": "### The Foundation of Digital Vision\n\nComputer Vision is the field of Artificial Intelligence that enables computers and systems to derive meaningful information from digital images, videos, and other visual inputs. For humans, vision is intuitive. We open our eyes, light hits our retinas, and our brain instantly categorizes objects, depth, and movement. But for a computer, an image is nothing more than a massive array of numbers.\n\nTo teach a computer to 'see', we first need to understand how images are represented digitally. An image is composed of tiny squares called **pixels** (picture elements). In a grayscale image, each pixel is represented by a single number ranging from 0 (completely black) to 255 (completely white). \n\nIn a standard color image, things become more complex. Color images use the RGB (Red, Green, Blue) color model. This means a single color image is actually composed of **three separate matrices** (or channels) stacked on top of each other. If you have a high-definition image that is 1920 pixels wide and 1080 pixels high, the computer reads it as a 3D tensor of shape `(1080, 1920, 3)`. That is over 6.2 million individual numbers just for one frame!"
+          },
+          {
+            "type": "text",
+            "content": "### The Problem with Traditional Neural Networks\n\nHistorically, data scientists worked with tabular data (like spreadsheets) where each column represents a distinct feature (e.g., Age, Income, Height). We passed this data into standard Fully Connected Neural Networks (also known as Multi-Layer Perceptrons or MLPs).\n\nWhen researchers first tried applying MLPs to images, they treated every single pixel as a distinct feature. To do this, the 2D grid of pixels (or 3D tensor for color) had to be **flattened** into a single, massive 1D array. For a tiny 224x224 RGB image, flattening results in an array of `224 * 224 * 3 = 150,528` input neurons.\n\nThis approach introduced two massive problems:\n\n1. **Astronomical Parameter Counts:** If the first hidden layer of our network has just 1,000 neurons, the weights connecting the input layer to the hidden layer would require over 150 million parameters! This makes the network computationally impossible to train without massive overfitting.\n\n2. **Destruction of Spatial Hierarchy:** This is the fatal flaw. When you flatten an image, a pixel at coordinate (10, 10) is suddenly millions of indices away from the pixel at (11, 10). The network loses all understanding that these pixels are physically next to each other and likely form a continuous edge or texture."
           },
           {
             "type": "image",
@@ -21,7 +25,7 @@
           },
           {
             "type": "text",
-            "content": "However, flattening a 2D image into a 1D pixel array destroys crucial spatial relationships. The network struggles to relearn that pixels next to each other form a continuous edge. To solve this, Convolutional Neural Networks (CNNs) were invented. They process images in their original 2D grid format."
+            "content": "### The Solution: Convolutional Neural Networks (CNNs)\n\nTo solve the spatial destruction problem, researchers looked to biology. In 1959, Hubel and Wiesel discovered that neurons in the visual cortex of cats respond to specific localized patterns, like edges and angles. This inspired the creation of the Convolutional Neural Network (CNN).\n\nUnlike traditional networks, CNNs do not flatten the image right away. Instead, they accept the 3D tensor format and process it in its native grid structure. This allows the network to learn a hierarchy of features. The first layers learn simple patterns like vertical and horizontal edges; the middle layers learn shapes like circles or corners; and the final layers learn complex objects like dog faces or car wheels."
           },
           {
             "type": "image",
@@ -29,7 +33,7 @@
           },
           {
             "type": "text",
-            "content": "The core of a CNN is the Convolutional Layer. It uses small mathematical matrices called 'Kernels' or 'Filters' (e.g., a 3x3 grid) that slide over the input image. As they slide, they perform element-wise multiplication to extract specific features like edges, textures, and patterns, creating a 'Feature Map'."
+            "content": "### Deep Dive: The Convolution Operation\n\nThe magic of a CNN happens in the **Convolutional Layer**. Instead of connecting every pixel to every neuron, a CNN uses small mathematical matrices called **Kernels** (or Filters). A common kernel size is 3x3.\n\nImagine a 3x3 kernel acting as a tiny flashlight shining on a 3x3 patch of the image. The network performs an **element-wise multiplication** between the numbers in the image patch and the numbers in the kernel, and sums the results into a single number. The flashlight then slides (or 'convolves') across the entire image from left to right, top to bottom.\n\nBy carefully selecting the numbers inside the kernel, this operation can act as an edge detector, a sharpener, or a blur filter. For example, a kernel with positive numbers on the left and negative numbers on the right will output high values only when it detects a vertical edge! \n\nAs the kernel slides over the original image, it produces a brand new 2D grid called a **Feature Map**. If a CNN layer has 64 different filters, it will output a stack of 64 distinct feature maps, each highlighting a different pattern found in the image."
           },
           {
             "type": "image",
@@ -37,11 +41,19 @@
           },
           {
             "type": "text",
-            "content": "After extracting features, the network needs to reduce the spatial resolution to save computational power and extract the most dominant features. This is done using 'Pooling Layers' (like Max Pooling). It slides a window over the feature map and only keeps the maximum value, effectively downsampling the image while retaining the critical information."
+            "content": "### Hyperparameters of Convolution: Strides and Padding\n\nWhen designing a convolutional layer, engineers must configure two critical hyperparameters:\n\n**Stride:** This determines how far the kernel moves at each step. A stride of 1 means the kernel slides one pixel at a time, creating a feature map roughly the same size as the input. A stride of 2 means the kernel skips every other pixel, which effectively halves the width and height of the resulting feature map.\n\n**Padding:** Because the kernel needs a full 3x3 grid to operate, it cannot perfectly center itself on the pixels at the very edge of an image. If left alone (known as 'Valid Padding'), the resulting feature map will shrink slightly after every convolution. To prevent this, we use 'Same Padding', which artificially surrounds the original image with a border of zeros so the kernel can reach the edges, maintaining the original spatial dimensions."
+          },
+          {
+            "type": "text",
+            "content": "### The Need for Downsampling: Pooling Layers\n\nAs an image passes through deeper convolutional layers, the number of feature maps grows rapidly (from 64, to 128, to 256). To manage the explosion of data and reduce computational load, CNNs employ **Pooling Layers**.\n\nPooling is a form of non-linear down-sampling. It is completely deterministic (meaning it has no learnable weights). The most common technique is **Max Pooling**. \n\nA Max Pooling layer usually employs a 2x2 window with a stride of 2. It looks at a 2x2 grid of the feature map, selects the single largest number, and discards the other three. Why the maximum? Because a high number in a feature map represents a strong detection of a specific feature (like a sharp edge). By keeping only the maximum, the network retains the most important information while throwing away the noise.\n\nMore importantly, Max Pooling introduces **Translation Invariance**. If a dog shifts slightly to the left in a photograph, the maximum value might move to a different pixel in the 2x2 grid, but the output of the Max Pooling layer remains exactly the same. This allows the CNN to recognize objects regardless of exactly where they are positioned in the frame."
           },
           {
             "type": "image",
             "content": "/pooling_layer.jpg"
+          },
+          {
+            "type": "text",
+            "content": "### Putting it all Together: Classification\n\nAfter passing through alternating Convolutional and Pooling layers, the image has been transformed from a massive grid of raw pixels into a small, dense 3D tensor representing highly abstract concepts (e.g., 'fur texture', 'round eyes', 'pointy ears').\n\nAt this final stage, the spatial relationships matter much less. Now, we finally **flatten** this small tensor into a 1D vector and pass it into a traditional Fully Connected Layer. \n\nThe final layer of the network contains neurons corresponding to our classes (e.g., one neuron for 'Dog', one for 'Cat'). We apply a **Softmax activation function**, which squashes the final outputs into a probability distribution that sums to 1.0 (or 100%). The network outputs `Dog: 98.2%`, proving it has successfully learned to 'see'."
           }
         ]
       },
