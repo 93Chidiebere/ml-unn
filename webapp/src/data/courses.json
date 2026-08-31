@@ -253,7 +253,39 @@
         "contentBlocks": [
           {
             "type": "text",
-            "content": "This module explores core concepts derived directly from the KAUST Academy training materials. Engage with the 3D model below to visualize these complex terminologies."
+            "content": "## 1. Why Vision Needs a Memory of Sequence\n\nEverything covered so far treats an image as a single, static input. But a lot of visually interesting data isn't static \u2014 it's a *sequence*: a video is a sequence of frames, a spoken description of a scene is a sequence of words, and a caption generated for an image is itself a sequence of words being produced one at a time.\n\n**Recurrent Neural Networks (RNNs)** are designed for exactly this: data where *order matters* and where understanding the current input depends on what came before it.\n\n**Analogy:** Reading a single photo is like looking at a single frame of a Nollywood movie \u2014 you get a snapshot, but you have no idea what's happening in the *plot*. Watching the movie (a sequence of frames) requires remembering what happened in earlier scenes to understand the current one. An RNN is built to carry that kind of memory forward through a sequence."
+          },
+          {
+            "type": "image",
+            "content": "/rnn_movie_sequence.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 2. How an RNN Works\n\nA standard feedforward network (like the classifiers from earlier modules) processes one input and produces one output \u2014 no memory between separate inputs. An RNN instead maintains a **hidden state**, a running summary of everything seen so far in the sequence, and updates it at every step:\n\n$$h_t = f(W_x x_t + W_h h_{t-1} + b)$$\n\nAt each time step $t$, the network combines the new input $x_t$ with its previous hidden state $h_{t-1}$ to produce an updated hidden state $h_t$. The same weights ($W_x$, $W_h$) are reused at every step \u2014 this weight-sharing across time is what makes it \"recurrent.\"\n\n**Nigerian analogy:** Imagine a trader tallying daily sales in a notebook across a week. Each day's entry ($x_t$) is combined with the running total from all previous days ($h_{t-1}$) to produce an updated running total ($h_t$). The trader doesn't re-derive Monday's sales from scratch every day \u2014 they carry forward a *summary* and update it. That running summary is the hidden state.\n\n## 3. The Vanishing Gradient Problem in RNNs\n\nPlain RNNs struggle with **long sequences**. When training via backpropagation through time, gradients must flow backward through every time step \u2014 and just like very deep CNNs (Module 3), gradients can shrink to near-zero across many steps, meaning the network effectively \"forgets\" information from far in the past.\n\nThis is why a plain RNN might successfully use the previous word to predict the next one, but fail to connect information from the very beginning of a long paragraph to a prediction near the end."
+          },
+          {
+            "type": "image",
+            "content": "/rnn_hidden_state_ledger.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 4. LSTM and GRU: Learning What to Remember and Forget\n\n**Long Short-Term Memory (LSTM)** networks address this with a more sophisticated internal structure: a separate **cell state** (long-term memory) alongside the hidden state, controlled by three **gates**:\n- **Forget gate:** decides what old information to discard.\n- **Input gate:** decides what new information to add.\n- **Output gate:** decides what to output based on the current cell state.\n\n**Analogy:** Think of the cell state as a market trader's account ledger, and the gates as decisions the trader makes each day: what old debts to write off (forget gate), what new transactions to record (input gate), and what summary figure to actually report to a supplier that day (output gate). This selective, gated memory is why LSTMs can retain relevant information across much longer sequences than plain RNNs.\n\n**Gated Recurrent Units (GRUs)** simplify this into two gates (update and reset) instead of three, achieving similar performance to LSTMs with fewer parameters and faster training \u2014 a useful trade-off when compute is limited."
+          },
+          {
+            "type": "image",
+            "content": "/lstm_gates_valves.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 5. RNNs in Computer Vision Specifically\n\nWithin a vision curriculum, RNNs matter for tasks that combine images with sequences:\n\n- **Image captioning:** a CNN encodes an image into a feature vector, and an RNN (or LSTM) decodes that vector into a sequence of words describing the image \u2014 e.g., automatically generating a caption like \"a woman selling tomatoes at a roadside stall\" for an uploaded photo.\n- **Video understanding:** processing a video frame-by-frame with a CNN, then feeding the sequence of per-frame features into an RNN to model how the scene changes over time (e.g., recognizing an action like \"person crossing the road\" that only makes sense across multiple frames, not a single one).\n- **Visual question answering:** combining an image with a sequence of words (a question) to produce an answer.\n\nIt's worth noting upfront (previewing Module 7) that Transformers have now largely replaced RNNs for most of these sequence tasks, because they handle long-range dependencies more effectively and train faster via parallelization. RNNs remain important to learn because they establish the core intuitions \u2014 sequential memory, gating, vanishing gradients \u2014 that motivated the Transformer's design."
+          },
+          {
+            "type": "image",
+            "content": "/image_captioning_pipeline.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 6. Worked Example: A Simple LSTM in Code\n\n```python\nimport torch\nimport torch.nn as nn\n\nclass ImageCaptionDecoder(nn.Module):\n    def __init__(self, feature_dim, vocab_size, hidden_dim=256):\n        super().__init__()\n        self.lstm = nn.LSTM(feature_dim, hidden_dim, batch_first=True)\n        self.fc = nn.Linear(hidden_dim, vocab_size)\n\n    def forward(self, image_features, word_sequence):\n        # image_features: encoded image (from a CNN, e.g. ResNet)\n        # word_sequence: embedded previous words in the caption so far\n        outputs, (hidden, cell) = self.lstm(word_sequence)\n        return self.fc(outputs)\n```\n\nHere, the LSTM's hidden state carries forward everything about the words generated so far in the caption, enabling it to produce a coherent next word rather than treating each word in isolation.\n\n## 7. Summary\n\n- RNNs process sequences by maintaining a hidden state updated at every step \u2014 a running memory, not just isolated single-input predictions.\n- Plain RNNs suffer from vanishing gradients over long sequences.\n- LSTMs (and the simpler GRUs) use gating mechanisms to control what to remember, forget, and output, enabling much longer effective memory.\n- In vision, RNNs historically powered image captioning, video understanding, and visual question answering \u2014 tasks combining a static image with a sequential output or input.\n\n## 8. Exercises for Discussion\n\n1. Explain, using the market-trader ledger analogy (or one of your own), why a plain RNN might forget something mentioned at the very start of a long sequence by the time it reaches the end.\n2. You're building a system to automatically generate short Igbo-language captions for photos uploaded to a local marketplace app. Sketch (in words) the two components you'd need and what each is responsible for.\n3. Why might a GRU be a more practical choice than an LSTM for a student project running on a laptop with no GPU?"
           }
         ]
       },
