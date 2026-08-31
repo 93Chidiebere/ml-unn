@@ -164,11 +164,39 @@
         "contentBlocks": [
           {
             "type": "text",
-            "content": "Object Detection extends image classification by not only identifying what is in an image, but exactly where it is. Using algorithms like YOLO (You Only Look Once) or Faster R-CNN, the AI draws bounding boxes around multiple objects simultaneously and assigns confidence scores. This is the foundational technology behind autonomous vehicles navigating complex street scenes."
+            "content": "## 1. From \"What\" to \"What and Where\"\n\nEverything so far (image classification) answers one question: \"what is in this image?\" **Object detection** answers a harder, more useful question: **\"what is in this image, and where exactly is it?\"**\n\nThis distinction matters enormously in real deployments. A classifier can tell you \"there is a pothole in this image.\" An object detector can tell you \"there are 3 potholes, and here are their exact bounding boxes\" \u2014 which is what you'd actually need if you were building a system for the Lagos State Public Works Corporation to automatically flag and locate road damage from dashcam footage.\n\n## 2. The Core Output: Bounding Boxes + Class Labels\n\nAn object detector predicts, for each object, four numbers describing a rectangle (bounding box: x, y, width, height) plus a class label (and often a confidence score). A single image might contain zero, one, or dozens of such boxes \u2014 the number of outputs isn't fixed, which is what makes detection structurally harder than classification (a fixed-size output problem)."
           },
           {
             "type": "image",
-            "content": "/object_detection.jpg"
+            "content": "/bounding_boxes_potholes.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 3. Two-Stage Detectors: R-CNN Family\n\n**R-CNN (Region-based CNN)** works in two stages:\n1. **Propose regions** that might contain an object (originally using a separate, non-learned algorithm called Selective Search).\n2. **Classify each region** using a CNN, and refine its bounding box.\n\nThis was accurate but painfully slow \u2014 running a full CNN separately on ~2000 proposed regions per image.\n\n**Fast R-CNN** sped this up by running the CNN once on the whole image and then extracting features for each proposed region from that single shared feature map, rather than re-running the CNN per region.\n\n**Faster R-CNN** went further by replacing the non-learned region proposal step with a learned **Region Proposal Network (RPN)** \u2014 making the entire pipeline trainable end-to-end.\n\n**Analogy:** Imagine a market inspector checking for expired products. The slow way (R-CNN) is to walk into a stall, pick up every single item one at a time, and inspect it individually \u2014 2000 separate trips into the stall. Fast R-CNN is like taking one photograph of the whole stall, then zooming into different regions of that *single* photo to inspect items \u2014 one trip, many inspections. Faster R-CNN adds a smart assistant who first quickly points out \"these are the shelves likely to have expired items\" before the inspector even zooms in, saving even more time."
+          },
+          {
+            "type": "image",
+            "content": "/rcnn_market_inspector.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 4. One-Stage Detectors: YOLO and SSD\n\nTwo-stage detectors are accurate but still relatively slow because they have a separate proposal step. **One-stage detectors** skip the proposal step entirely and directly predict boxes and classes across the whole image in a single pass.\n\n**YOLO (You Only Look Once)** divides the image into a grid, and each grid cell directly predicts bounding boxes and class probabilities for objects centered in that cell \u2014 all in one forward pass through the network. This makes YOLO dramatically faster, enabling real-time detection (useful for live video, e.g. traffic camera monitoring on the Third Mainland Bridge, or a security camera system for a Nsukka campus hostel).\n\n**SSD (Single Shot Detector)** is similar in spirit \u2014 single-pass, grid-based \u2014 but predicts at multiple feature map resolutions to better handle objects of different sizes.\n\n**The trade-off:** one-stage detectors (YOLO, SSD) are faster but historically slightly less accurate on small or overlapping objects than two-stage detectors (Faster R-CNN), though the gap has narrowed significantly with newer YOLO versions."
+          },
+          {
+            "type": "image",
+            "content": "/yolo_grid_traffic.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 5. Evaluating Detectors: IoU and mAP\n\n**Intersection over Union (IoU)** measures how well a predicted box overlaps with the true (ground-truth) box:\n\n$$IoU = \\frac{\\text{Area of Overlap}}{\\text{Area of Union}}$$\n\nA prediction is usually counted as \"correct\" if IoU exceeds a threshold (commonly 0.5).\n\n**Mean Average Precision (mAP)** aggregates precision and recall across all classes and IoU thresholds into a single summary score \u2014 the standard metric used to compare detectors.\n\n**Nigerian scenario:** if you're building a system to count and locate okada riders without helmets from traffic camera footage for a state road safety authority, IoU tells you whether your predicted box actually sits on the rider's head region accurately enough to be useful evidence, not just \"somewhere on the bike.\""
+          },
+          {
+            "type": "image",
+            "content": "/iou_math_diagram.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 6. Non-Maximum Suppression (NMS)\n\nDetectors often produce multiple overlapping boxes for the same object. **NMS** cleans this up: keep the highest-confidence box, suppress (remove) other boxes that overlap it significantly (high IoU), and repeat for remaining boxes.\n\n## 7. Worked Example: Running YOLO Inference\n\n```python\nfrom ultralytics import YOLO\n\nmodel = YOLO(\"yolov8n.pt\")  # pretrained, lightweight variant\nresults = model(\"market_scene.jpg\")\n\nfor result in results:\n    for box in result.boxes:\n        cls = result.names[int(box.cls)]\n        conf = float(box.conf)\n        x1, y1, x2, y2 = box.xyxy[0].tolist()\n        print(f\"{cls} ({conf:.2f}) at [{x1:.0f}, {y1:.0f}, {x2:.0f}, {y2:.0f}]\")\n```\n\nRunning this on a photo of an Onitsha Main Market street scene, for example, would output something like `person (0.91) at [120, 45, 210, 300]`, `motorcycle (0.87) at [...]`, one line per detected object \u2014 exactly the \"what and where\" output described in Section 1.\n\n## 8. Summary\n\n- Object detection extends classification by also predicting *location* (bounding boxes), and the number of outputs varies per image.\n- Two-stage detectors (R-CNN family) propose then classify \u2014 accurate but slower.\n- One-stage detectors (YOLO, SSD) predict everything in one pass \u2014 much faster, historically a small accuracy trade-off.\n- IoU measures box overlap quality; mAP summarizes overall detector performance; NMS removes duplicate detections.\n\n## 9. Exercises for Discussion\n\n1. You need a system to detect and locate cracks in a bridge from a slow-moving inspection drone, where accuracy matters far more than speed (you have all the time you need to process footage afterward). Would you choose Faster R-CNN or YOLO? Justify your choice using the trade-offs discussed above.\n2. Explain, without using the words \"region\" or \"proposal,\" why classifying a whole image once and then examining crops of its feature map (Fast R-CNN) is faster than re-running a CNN separately for every proposed box (R-CNN).\n3. A detector proposes two overlapping boxes for the same danfo bus in an image, both labeled \"bus\" with confidence 0.88 and 0.62. Walk through what NMS would do with these two boxes."
           }
         ]
       },
