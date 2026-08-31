@@ -5,6 +5,8 @@ import NeuralNetworkScene from './3d/NeuralNetworkScene';
 import DecisionTreeScene from './3d/DecisionTreeScene';
 import ScatterPlotScene from './3d/ScatterPlotScene';
 import NLPWordCloudScene from './3d/NLPWordCloudScene';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import coursesData from '../data/courses.json';
 
 function renderScene(visualType: string, keyId: string) {
@@ -97,9 +99,42 @@ export default function CourseView() {
               {activeModule.contentBlocks?.map((block: any, idx: number) => {
                 if (block.type === 'text') {
                   return (
-                    <p key={idx} className="text-gray-300 text-lg leading-relaxed font-light">
-                      {block.content}
-                    </p>
+                    <div key={idx} className="text-gray-300 text-lg leading-relaxed font-light prose-invert max-w-none">
+                      <ReactMarkdown 
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-white" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4 text-white" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-6 mb-3 text-white" {...props} />,
+                          p: ({node, ...props}) => <p className="mb-4" {...props} />,
+                          ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-4 space-y-2" {...props} />,
+                          ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-4 space-y-2" {...props} />,
+                          li: ({node, ...props}) => <li className="" {...props} />,
+                          a: ({node, ...props}) => <a className="text-green-400 hover:underline" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-semibold text-gray-200" {...props} />,
+                          code: ({inline, className, children, ...props}: any) => {
+                            const match = /language-(\w+)/.exec(className || '')
+                            return inline ? (
+                              <code className="bg-gray-800 text-gray-200 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                                {children}
+                              </code>
+                            ) : (
+                              <div className="mb-6 rounded-xl overflow-hidden border border-gray-800 bg-[#0a0a0a]">
+                                {match && <div className="bg-gray-900 px-4 py-1.5 text-xs text-gray-400 border-b border-gray-800 uppercase tracking-wider font-mono">{match[1]}</div>}
+                                <pre className="p-4 overflow-x-auto text-sm font-mono text-gray-300"><code {...props}>{children}</code></pre>
+                              </div>
+                            )
+                          },
+                          blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-gray-700 pl-4 py-1 italic text-gray-400 mb-4 bg-gray-900/50 rounded-r-lg" {...props} />,
+                          table: ({node, ...props}) => <div className="overflow-x-auto mb-6"><table className="w-full border-collapse border border-gray-800 text-sm" {...props} /></div>,
+                          thead: ({node, ...props}) => <thead className="bg-gray-900" {...props} />,
+                          th: ({node, ...props}) => <th className="border border-gray-800 px-4 py-2 font-medium text-left text-gray-300" {...props} />,
+                          td: ({node, ...props}) => <td className="border border-gray-800 px-4 py-2 text-gray-400" {...props} />,
+                        }}
+                      >
+                        {block.content}
+                      </ReactMarkdown>
+                    </div>
                   );
                 } else if (block.type === 'image') {
                   return (
