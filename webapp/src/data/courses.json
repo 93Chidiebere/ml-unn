@@ -66,11 +66,39 @@
         "contentBlocks": [
           {
             "type": "text",
-            "content": "Practical Deep Learning goes beyond theory and looks at how models are actually trained and deployed on massive GPU clusters. It involves setting up data pipelines, batching large datasets, configuring computational graphs, and optimizing the backpropagation process. This module covers the hardware and infrastructure required to train state-of-the-art models efficiently."
+            "content": "## 1. Why This Module Exists\n\nKnowing what a neural network *is* (the job of Module 1) is different from knowing how to actually get one to train well on real data. This module is the \"engineering\" layer of deep learning: the decisions that separate a model that trains smoothly from one that stalls, diverges, or overfits after an hour of GPU time you didn't have to spare.\n\nThink of it like the difference between knowing combustion makes an engine run, and knowing how to actually tune, fuel, and maintain a generator so it doesn't fail you during a NEPA outage. The theory (Module 1) is the combustion. This module is the tuning.\n\n## 2. The Core Building Blocks\n\n### 2.1 Loss Functions\nA loss function is the single number a network is trying to shrink. For classification (e.g. \"is this cassava leaf diseased or healthy?\") we use **cross-entropy loss**, which penalizes confident wrong answers far more than uncertain wrong answers. For regression (e.g. \"predict the naira/dollar rate tomorrow from historical data\") we use **mean squared error (MSE)**.\n\nCross-entropy intuition: if a model says \"99% healthy\" about a diseased cassava leaf, the loss is large \u2014 the model was confidently wrong. If it says \"55% healthy\" it's still wrong but the penalty is smaller, because it was hedging.\n\n### 2.2 Optimizers\nThe optimizer decides *how* the network updates its weights after computing the loss.\n\n- **SGD (Stochastic Gradient Descent):** the simplest \u2014 take a step in the direction that reduces loss, scaled by a learning rate.\n- **Momentum:** adds \"memory\" of previous steps, like a danfo bus that's already moving downhill and doesn't stop dead at every pothole \u2014 it keeps some of its previous velocity.\n- **Adam:** the most commonly used optimizer today. It adapts the step size per-parameter automatically, combining momentum with per-parameter scaling. Almost always a safe default."
           },
           {
             "type": "image",
-            "content": "/practical_deep_learning.jpg"
+            "content": "/loss_landscape_momentum.jpg"
+          },
+          {
+            "type": "text",
+            "content": "### 2.3 Learning Rate\nThis is the single most important hyperparameter in deep learning. Too high, and training diverges \u2014 loss bounces around or explodes to NaN. Too low, and training crawls, sometimes taking days to reach a result an appropriately-tuned rate would reach in hours.\n\n**Nigerian analogy:** think of learning rate like the amount of pepper you add tasting soup while cooking. Add too much at once (high LR) and you ruin the pot \u2014 can't easily undo it. Add too little (low LR) and you'll be tasting and adjusting all night before it's right. The skill is in tasting-and-adjusting in the right-sized increments \u2014 which is exactly what a **learning rate scheduler** does: start with slightly bigger \"tastes\" early, and shrink them as you get close to the right flavor."
+          },
+          {
+            "type": "image",
+            "content": "/learning_rate_steps.jpg"
+          },
+          {
+            "type": "text",
+            "content": "### 2.4 Regularization\nRegularization keeps a model from memorizing the training data instead of learning general patterns.\n\n- **Dropout:** randomly \"switches off\" a fraction of neurons during training, forcing the network not to rely too heavily on any single pathway. Analogy: if a market trader trains five apprentices but only ever lets one specific apprentice handle price negotiation, the business collapses the day that apprentice is sick. Dropout forces every apprentice to be capable, because on any given day, a random subset is \"absent.\""
+          },
+          {
+            "type": "image",
+            "content": "/dropout_regularization.jpg"
+          },
+          {
+            "type": "text",
+            "content": "- **Weight decay (L2 regularization):** penalizes very large weights, encouraging simpler, more generalizable functions.\n- **Data augmentation:** artificially expands the training set by flipping, rotating, cropping, or color-jittering images. If you're building a system to recognize okada (motorcycle taxi) riders from CCTV footage, augmenting with different lighting conditions (harsh midday Lagos sun vs. dusk) makes the model robust to real deployment conditions rather than just the exact lighting in your training photos."
+          },
+          {
+            "type": "image",
+            "content": "/data_augmentation_pipeline.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 3. Diagnosing a Training Run\n\nA model's behavior during training tells a story:\n\n- **Training loss doesn't drop at all:** LR too low, bad initialization, or a bug in the data pipeline. *Fix: Raise LR; sanity-check a single batch overfits.*\n- **Training loss explodes to NaN:** LR too high, unnormalized inputs. *Fix: Lower LR; normalize/standardize inputs.*\n- **Training loss low, validation loss high:** Overfitting. *Fix: Add dropout, weight decay, more data, augmentation.*\n- **Both losses high and flat:** Underfitting \u2014 model too small or not trained long enough. *Fix: Bigger model, more epochs, check that data is being read correctly.*\n\n### Nigerian scenario: Diagnosing a UNN final-year project\nImagine a final-year student building a model to detect fake alerts on a mobile banking app. After training, the model gets 99% accuracy on the training set but only 60% on a held-out test set. This is a textbook overfitting symptom. The fix isn't \"train more\" \u2014 it's regularization, more diverse data (transactions from different banks, different times of day, different network conditions), and possibly a simpler model.\n\n## 4. The Deep Learning Workflow in Practice\n\n1. **Start simple.** Before building a 50-layer CNN, get a tiny model to overfit a small subset of data (e.g., 50 images). If it can't even memorize 50 examples, there's a bug \u2014 not a modeling problem.\n2. **Normalize your inputs.** Images should typically be scaled to [0,1] or standardized using dataset mean/std. Skipping this is one of the most common causes of failed training runs.\n3. **Pick a sensible batch size.** Larger batches give more stable gradient estimates but need more memory; smaller batches are noisier but can generalize better and fit on more limited hardware \u2014 relevant if you're training on a single shared GPU in a Nigerian university lab rather than a cluster.\n4. **Monitor both training and validation loss**, not just training loss.\n5. **Use checkpointing.** Save your model periodically. If your power goes out mid-training (a real risk without reliable electricity), you don't want to lose 6 hours of compute \u2014 save every epoch.\n\n## 6. Summary\n\n- The loss function defines success; the optimizer defines how you chase it.\n- Learning rate is the parameter most likely to make or break training \u2014 tune it like you'd taste-adjust pepper in soup, gradually.\n- Regularization (dropout, weight decay, augmentation) prevents memorization and improves real-world performance.\n- Diagnosing training curves (train vs. validation loss) tells you exactly what's wrong before you waste more compute time."
           }
         ]
       },
