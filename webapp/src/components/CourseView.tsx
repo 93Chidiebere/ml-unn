@@ -5,6 +5,9 @@ import NeuralNetworkScene from './3d/NeuralNetworkScene';
 import DecisionTreeScene from './3d/DecisionTreeScene';
 import ScatterPlotScene from './3d/ScatterPlotScene';
 import NLPWordCloudScene from './3d/NLPWordCloudScene';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import coursesData from '../data/courses.json';
@@ -101,7 +104,8 @@ export default function CourseView() {
                   return (
                     <div key={idx} className="text-gray-300 text-lg leading-relaxed font-light prose-invert max-w-none">
                       <ReactMarkdown 
-                        remarkPlugins={[remarkGfm]}
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
                         components={{
                           h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-white" {...props} />,
                           h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-8 mb-4 text-white" {...props} />,
