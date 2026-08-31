@@ -209,11 +209,39 @@
         "contentBlocks": [
           {
             "type": "text",
-            "content": "Image Segmentation goes a step further than standard object detection. Instead of just drawing a bounding box around a car, semantic segmentation assigns a class label to every single pixel in the image. This means the AI understands the exact geometric boundaries of the car, the road, the pedestrians, and the sky. This is crucial for applications like autonomous driving and medical imaging, where precise boundaries (like the edge of a tumor or the curvature of a lane) must be calculated exactly."
+            "content": "## 1. Beyond Boxes: Pixel-Level Understanding\n\nObject detection (Module 4) draws a rectangle around an object. **Segmentation** goes further: it labels *every pixel* in the image, giving a precise outline of exactly which pixels belong to which object \u2014 not just a loose box around it.\n\nThink of the difference between a delivery rider telling you \"the pothole is roughly in this area of the road\" (a box) versus a road engineer tracing the *exact* boundary of the pothole with chalk before a repair crew arrives (segmentation). Both are useful, but they answer different levels of precision.\n\n## 2. Two Flavors of Segmentation\n\n**Semantic segmentation** labels every pixel with a class, but does not distinguish between different instances of the same class. If a photo has three okada riders, semantic segmentation labels all pixels belonging to any rider as \"person\" \u2014 it doesn't separate rider 1 from rider 2 from rider 3.\n\n**Instance segmentation** goes further: it labels every pixel *and* distinguishes individual objects, so rider 1, rider 2, and rider 3 are each their own separate mask, even though they share the same class label.\n\n**Panoptic segmentation** combines both: it segments countable objects individually (instance-level: each person, each vehicle) while also labeling uncountable background regions as a single class (semantic-level: \"road,\" \"sky,\" \"vegetation\").\n\n**Nigerian analogy:** Imagine aerial imagery of a market day at Balogun Market. Semantic segmentation paints all stalls one color, all people another, all roadway a third \u2014 a colored map of *categories*. Instance segmentation additionally separates *each individual stall* and *each individual person* as distinct shapes, useful if you needed to count exactly how many traders were present. Panoptic segmentation gives you both at once: every trader counted individually, but the road and sky painted as one continuous background region each."
           },
           {
             "type": "image",
-            "content": "/image_segmentation.jpg"
+            "content": "/segmentation_types.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 3. Architecture: The Encoder-Decoder (U-Net)\n\nClassification networks compress an image down to a single label \u2014 they don't need to preserve spatial detail. Segmentation needs the *opposite*: a label for every pixel, meaning spatial detail must be preserved or recovered.\n\n**U-Net** solves this with an encoder-decoder structure:\n- The **encoder** progressively downsamples the image (like a normal CNN), extracting increasingly abstract features while losing spatial resolution.\n- The **decoder** progressively upsamples back to the original resolution, reconstructing a full-resolution pixel-wise prediction.\n- **Skip connections** (the same core idea as ResNet, Module 3) connect encoder layers directly to their matching decoder layers, feeding back fine spatial detail (edges, exact boundaries) that would otherwise be lost during downsampling.\n\n**Analogy:** Imagine summarizing a long Yoruba proverb story down to one sentence (the encoder \u2014 compressing to essence), then trying to reconstruct the *full detailed story* from that one sentence alone (the decoder without skip connections) \u2014 you'd lose a lot of the original texture and specific detail. Skip connections are like keeping the original story notes on hand while reconstructing, so the retelling can recover fine details the one-sentence summary lost."
+          },
+          {
+            "type": "image",
+            "content": "/unet_architecture.jpg"
+          },
+          {
+            "type": "text",
+            "content": "U-Net was originally developed for biomedical image segmentation (e.g., outlining cells or tumors in microscopy/MRI scans) where pixel-precise boundaries genuinely matter for diagnosis \u2014 directly relevant to a Nigerian teaching hospital building a tool to help outline tumor regions in scans, where a rough bounding box would be clinically useless."
+          },
+          {
+            "type": "image",
+            "content": "/medical_segmentation.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 4. Mask R-CNN: Detection + Segmentation Together\n\n**Mask R-CNN** extends Faster R-CNN (Module 4) by adding a third output branch: alongside the class label and bounding box, it also predicts a binary pixel mask for each detected object. This is the standard approach for **instance segmentation** \u2014 detect each object, then trace its precise shape within its box.\n\n## 5. Evaluating Segmentation: IoU at the Pixel Level\n\nSegmentation quality is measured using **pixel-wise IoU** (same core concept as Module 4's box IoU, but computed over sets of pixels rather than rectangles): the overlap between predicted and ground-truth pixel masks, divided by their union. Averaged across classes, this gives **mean IoU (mIoU)**, the standard segmentation benchmark metric."
+          },
+          {
+            "type": "image",
+            "content": "/mask_rcnn_vehicle.jpg"
+          },
+          {
+            "type": "text",
+            "content": "## 6. Worked Example: Semantic Segmentation with a Pretrained Model\n\n```python\nimport torch\nfrom torchvision.models.segmentation import deeplabv3_resnet50\nfrom torchvision import transforms\nfrom PIL import Image\n\nmodel = deeplabv3_resnet50(weights=\"DEFAULT\").eval()\n\npreprocess = transforms.Compose([\n    transforms.Resize(520),\n    transforms.ToTensor(),\n    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),\n])\n\nimg = Image.open(\"nsukka_road_scene.jpg\").convert(\"RGB\")\ninput_tensor = preprocess(img).unsqueeze(0)\n\nwith torch.no_grad():\n    output = model(input_tensor)[\"out\"][0]\n\npredicted_mask = output.argmax(0)  # class index for every pixel\n```\n\n`predicted_mask` here is a full-resolution grid where every single pixel has been assigned a class (e.g., \"road,\" \"person,\" \"vehicle,\" \"vegetation\") \u2014 this is what makes segmentation fundamentally different from the single label or bounding box outputs of earlier modules.\n\n## 7. Summary\n\n- Segmentation labels every pixel, not just a bounding region \u2014 semantic (class only), instance (class + individual objects), or panoptic (both).\n- U-Net's encoder-decoder-with-skip-connections structure is the standard architecture family for recovering fine spatial detail lost during downsampling.\n- Mask R-CNN extends object detection to also produce a pixel mask per detected instance.\n- mIoU (pixel-wise IoU averaged across classes) is the standard evaluation metric.\n\n## 8. Exercises for Discussion\n\n1. A state ministry of agriculture wants to measure the exact hectares of land affected by flooding from satellite imagery, not just detect \"flooded regions exist.\" Would semantic, instance, or panoptic segmentation fit this task best, and why?\n2. Explain why skip connections are just as important in U-Net as they are in ResNet, even though the two architectures solve different problems (classification vs. pixel-wise prediction).\n3. If you were segmenting a crowded photo of NYSC orientation camp participants doing morning parade, explain in your own words why instance segmentation (not semantic) would be necessary to count exactly how many corps members are present."
           }
         ]
       },
